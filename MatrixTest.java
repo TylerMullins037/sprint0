@@ -3,18 +3,21 @@ import org.junit.jupiter.api.Test;
 
 public class MatrixTest {
     @Test
+    // Test whether the matrix is square
     void testIsSquare() {
         Matrix squareMatrix = new Matrix(4,4);
         assertTrue(squareMatrix.isSquare(), "Matrix should be square.");
     }
 
     @Test
+    // Test whether the matrix is not square
     void testIsNotSquare() {
         Matrix squareMatrix = new Matrix(3,4);
         assertFalse(squareMatrix.isSquare(), "Matrix should not be square.");
     }
 
     @Test
+    // Tests the transposing of a matrix
     void testTranspose() {
         double[][] data = {
             {0,1,2},
@@ -34,44 +37,48 @@ public class MatrixTest {
     }
 
     @Test
+    // Test the determinant of a matrix
     void testDeterminant() {
-        double[][] data = {
+        // Test for a 2x2 matrix
+        double[][] data2 = {
             {1, 2},
             {3, 4}
         };
-        Matrix matrix = new Matrix(data);
-        assertEquals(-2, matrix.determinant(), "Determinant should be -2.");
+        Matrix matrix2 = new Matrix(data2);
+        assertEquals(-2, matrix2.determinant(), "Determinant should be -2.");
 
-        // Test a 3x3 matrix
-        double[][] data3x3 = {
+        // Test for a 3x3 matrix
+        double[][] data3 = {
             {1, 2, 3},
             {0, 4, 5},
             {1, 0, 6}
         };
-        Matrix matrix3x3 = new Matrix(data3x3);
-        assertEquals(22, matrix3x3.determinant(), "Determinant should be 6.");
+        Matrix matrix3 = new Matrix(data3);
+        assertEquals(22, matrix3.determinant(), "Determinant should be 22.");
         
         // Test for a non-square matrix
-        double[][] dataNonSquare = {
+        double[][] dataN = {
             {1, 2, 3}
         };
-        Matrix nonSquareMatrix = new Matrix(dataNonSquare);
-        assertTrue(Double.isNaN(nonSquareMatrix.determinant()), "Determinant of non-square matrix should be NaN.");
+        Matrix matrixN = new Matrix(dataN);
+        assertTrue(Double.isNaN(matrixN.determinant()), "Determinant of non-square matrix should be NaN.");
     
     }
 
     @Test
+    // Tests the inverse of a matrix
     void testInverse() {
        // Test invertible 2x2 matrix
-       double[][] data2x2 = {
+       double[][] data2 = {
         {4, 7},
         {2, 6}
     };
-    Matrix matrix2x2 = new Matrix(data2x2);
-    Matrix inverse2x2 = matrix2x2.inverse();
-    assertNotNull(inverse2x2, "Inverse should not be null.");
-    assertEquals(0.6, inverse2x2.getData()[0][0], 0.0001);
-    assertEquals(-0.7, inverse2x2.getData()[0][1], 0.0001);
+    Matrix matrix2 = new Matrix(data2);
+    Matrix inverse2 = matrix2.inverse();
+    assertNotNull(inverse2, "Inverse should not be null.");
+    // inverse matrix calculator gave me {{3/5, -7/10},{-1/5,2/5}
+    assertEquals(0.6, inverse2.getData()[0][0], 0.0001);
+    assertEquals(-0.7, inverse2.getData()[0][1], 0.0001);
     
     // Test non-invertible matrix (determinant = 0)
     double[][] dataNonInvertible = {
